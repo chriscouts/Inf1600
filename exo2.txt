@@ -1,0 +1,42 @@
+extern void func_s(void){
+
+
+    flds b  //st[0] = b, st[1] = X
+    flds d  //st[0] = d, st[1] = b
+    fmulp   //st[0] = b*d, st[1] = b*d
+    flds c  //st[0] = c, st[1] = b*d
+    fsubrp  //st[0] = (b*d)-c, st[1] =(b*d)-c
+    fstps a //st[0] =(b*d)-c , st[1] = X
+    /// fstps a //st[0] = X, st[1] = X
+    flds f  //st[0] = f , st[1] = X
+    flds g  //st[0] = g , st[1] = f
+    fsubrp  //st[0] = f-g , st[1] = f-g
+    /// fstps g //st[0] = f-g , st[1] = X
+    flds a  //st[0] = (b*d)-c , st[1] = f-g
+    fdivp   //st[0] = ((b*d)-c)/(f-g) , st[1] = ((b*d)-c)/(f-g)
+    /// fstps b //st[0] = ((b*d)-c)/(f-g), st[1] = X
+    flds c  //st[0] = c, st[1] = ((b*d)-c)/(f-g)
+    faddp   //st[0] = (c+(((b*d)-c)/(f-g))), st[1] =(c+(((b*d)-c)/(f-g)))
+    fstps a //st[0] = (c+(((b*d)-c)/(f-g))), st[1] = X
+    /// fstps c //st[0] = X, st[1] = X
+
+    flds g  //st[0] = g, st[1] = (c+(((b*d)-c)/(f-g)))
+    flds e  //st[0] = e,  st[1] = g
+    fsubrp   //st[0] = g-e, st[1] = g-e
+    /// fstps a //st[0] = g-e, st[1] = X a = g-e
+    flds f  //st[0] = f, st[1] = g-e
+    fdivrp  //st[0] = ((g-e)/f), st[1] = ((g-e)/f)
+    flds a //st[0] = (c+(((b*d)-c)/(f-g))), st[1] = ((g-e)/f)
+    /// fstps a //st[0] = rien, st[1] = X
+    fmulp //st[0] = ((g-e)/f) * (c+(((b*d)-c)/(f-g))), st[1] = ((g-e)/f) * (c+(((b*d)-c)/(f-g)))
+    flds a //st[0] = ((g-e)/f) * (c+(((b*d)-c)/(f-g))), st[1] = X
+
+
+    /// flds c  //st[0] = (c+(((b*d)-c)/(f-g))), st[1] = rien
+    /// flds e  //st[0] = ((g-e)/f), st[1] = (c+(((b*d)-c)/(f-g)))
+    /// fmulp   //st[0] = ((g-e)/f) * (c+(((b*d)-c)/(f-g))), st[1] = ((g-e)/f) * (c+(((b*d)-c)/(f-g)))
+    /// fstps a //st[0] = ((g-e)/f) * (c+(((b*d)-c)/(f-g))), st[1] = rien
+    /// fstps a //st[0] = rien, st[1] = rien
+
+
+}
