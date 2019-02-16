@@ -4,8 +4,8 @@
 /* Modifiez ces définitions à votre guise afin de tester toutes les
 conditions; elles correspondent aux valeurs initiales de a, b, c, d et e : */
 #define INIT_A	0
-#define INIT_B	5000
-#define INIT_C	3000
+#define INIT_B	1000
+#define INIT_C	500
 #define INIT_D	500
 #define INIT_E	1000
 
