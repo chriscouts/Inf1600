@@ -11,6 +11,11 @@ func_s:
 	mov $0, %ecx				#%ecx = 0
 	jmp test
 	
+	test:
+		cmp $10, %ecx			#verifie si %ecx = 10
+		jnae for				#verifie si flags est <0 pour que la loop recommence
+		ret		
+
 	for:
 		#a=d+e-b
 		mov d, %eax 			#%eax = 0x100C
@@ -32,15 +37,14 @@ func_s:
 		mov c, %eax				#%eax = 0x1008
 		sub $500, %eax 			#%eax = 0x1008 - 0x01F4 = 0x0E14
 		mov %eax, c				# c = 0x0E14
-		mov b, %ebx				#%ebx = 0x1004
-		mov c, %eax
-		
+
 		#deuxieme if
-		cmp %eax, %ebx			#flags = 0x1004 - 0x0E14
+		cmp %eax, %edx			#flags = 0x1004 - 0x0E14
 		jna increment			#verifie que flags est > 0
 		jmp iftrue2
 
 	iftrue2:
+		mov b, %ebx
 		sub $500, %ebx			#%ebx = 0x1004 - 0x01F4 = 0x0E10
 		mov %ebx, b 			# b = 0x0E10
 		jmp increment
@@ -58,8 +62,5 @@ func_s:
 
 	increment:
 		inc %ecx				#%ecx++
+		jmp test
 			
-	test:
-		cmp $10, %ecx			#verifie si %ecx = 10
-		jnae for				#verifie si flags est <0 pour que la loop recommence
-		ret		
