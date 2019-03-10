@@ -17,21 +17,23 @@ matrix_row_aver_asm:
 		ret           		/* Return to the caller */
 
 	for1:
-		movl $0, -8(%ebp) 	# c=0
+		movl $0, -8(%ebp) 	# c = 0
         movl $0, -12(%ebp)  # elem = 0
 		jmp for2test
 
 	for2test:
-		mov -8(%ebp), %ebx
+		mov -8(%ebp), %ebx	# %ebx = c
 		cmp 16(%ebp), %ebx	# verifie c < matorder
 		jb	for2
 
-        mov -4(%ebp), %eax	# %eax = r
-		mov 12(%ebp), %ebx	# %ebx = outmatdata
-        mov -12(%ebp), %ecx # %ecx = elem
+        mov -4(%ebp), %esi	# %esi = r
+		mov 12(%ebp), %ecx	# %ecx = outmatdata
+		mov $0, %edx		# %edx = 0
+        mov -12(%ebp), %eax # %eax = elem
+		mov 16(%ebp), %ebx	# %ebx = matorder
 
-        idiv %ecx    # %ecx = elem/matorder
-        mov %ecx, 0(%ebx, %eax, 4)     # %ebx = outmatdata[r] = elem/matorder
+        idiv %ebx   		# %eax = elem/matorder
+        mov %eax, 0(%ecx, %esi, 4)     # %ebx = outmatdata[r] = elem/matorder
 
 		incl -4(%ebp)		# ++r
 		jmp for1test

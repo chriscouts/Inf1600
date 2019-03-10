@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
    matrix_multiply(matdata, transposec, multipliedc, matorder);
    matrix_print("original x transpose (C function)", multipliedc, matorder);
    /* Test assembler equality function */
-   if(matrix_equals_asm(matdata, matdata, matorder) == 1)
+   /*if(matrix_equals_asm(matdata, matdata, matorder) == 1)
       printf("OK: equality test with original matrix passed (assembler function)\n\n");
    else {
       printf("FAIL: equality test with original matrix failed (assembler function)\n\n");
@@ -96,9 +96,9 @@ int main(int argc, char** argv) {
    else {
       printf("FAIL: inequality test between original and reference transpose failed (assembler function)\n\n");
       exit(1);
-   }
+   }*/
    /* Test assembler function for transpose */
-   transposeasm = matrix_create(matorder);
+   /*transposeasm = matrix_create(matorder);
    matrix_transpose_asm(matdata, transposeasm, matorder);
    matrix_print("transpose (assembler function)", transposeasm, matorder);
    if(matrix_equals(transposec, transposeasm, matorder) == 1)
@@ -106,9 +106,9 @@ int main(int argc, char** argv) {
    else {
       printf("FAIL: transpose calculated with assembly function does not match reference\n\n");
       exit(1);
-   }
+   }*/
    /* Test assembler function for diagonal */
-   diagonalasm = matrix_create(matorder);
+   /*diagonalasm = matrix_create(matorder);
    matrix_diagonal_asm(matdata, diagonalasm, matorder);
    matrix_print("diagonal (assembler function)", diagonalasm, matorder);
    if(matrix_equals(diagonalc, diagonalasm, matorder) == 1)
@@ -116,7 +116,7 @@ int main(int argc, char** argv) {
    else {
       printf("FAIL: diagoanl calculated with assembly function does not match reference\n\n");
       exit(1);
-   }
+   }*/
    /* Test assembler function for multiplication */
    multipliedasm = matrix_create(matorder);
    matrix_multiply_asm(matdata, transposeasm, multipliedasm, matorder);

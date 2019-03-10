@@ -60,8 +60,7 @@ matrix_multiply_asm:
 
                 imul %ecx, %edx         # %edx = inmatdata1[%eax] * inmatdata2[%ebx] 
 
-                mov -16(%ebp), %eax
-                add %edx, %eax          # elem += inmatdata1[%eax] * inmatdata2[%ebx]       
+                addl %edx, -16(%ebp)          # elem += inmatdata1[%eax] * inmatdata2[%ebx]       
 
 
         for3end:   
