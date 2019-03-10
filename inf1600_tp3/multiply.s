@@ -21,7 +21,7 @@ matrix_multiply_asm:
                 jmp return
 
         for1:
-                mov $0, -8(%ebp)        # c = 0
+                movl $0, -8(%ebp)        # c = 0
                 jmp for2test
         
         for2test:
@@ -32,7 +32,7 @@ matrix_multiply_asm:
 		jmp  for1test  
         
         for2:
-                mov $0, -12(%ebp)       # i - 0
+                movl $0, -12(%ebp)       # i - 0
                 jb for3test
 
         for3test:
