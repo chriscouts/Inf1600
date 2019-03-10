@@ -41,8 +41,8 @@ matrix_transpose_asm:
 		mov 8(%ebp), %ecx	# %edx = inmatdata
 		mov 12(%ebp), %ebx	# %ebx = outmatdata
 
-		mov 0(%ecx, %edx, 4), %ecx		# %edx = inmatdata[%edx]
-		mov %ecx, 0(%ebx, %eax, 4)     # %ebx = outmatdata[%eax]
+		mov 0(%ecx, %edx, 4), %ecx		# %ecx = inmatdata[%edx]
+		mov %ecx, 0(%ebx, %eax, 4)     # %ebx = outmatdata[%eax] = inmatdata[%edx]
 		
 
 	for2end:
