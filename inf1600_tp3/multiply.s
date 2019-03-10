@@ -21,7 +21,7 @@ matrix_multiply_asm:
                 jmp return
 
         for1:
-                mov $0, -8(%ebp)        # c = 0
+                movl $0, -8(%ebp)        # c = 0
                 jmp for2test
         
         for2test:
@@ -32,7 +32,7 @@ matrix_multiply_asm:
 		jmp  for1test  
         
         for2:
-                mov $0, -12(%ebp)       # i - 0
+                movl $0, -12(%ebp)       # i - 0
                 jb for3test
 
         for3test:
@@ -45,12 +45,12 @@ matrix_multiply_asm:
         for3:
           	mov -4(%ebp), %eax	# %eax = r
 		imul 20(%ebp), %eax     # %eax = r * matorder  
-                mov -12(%ebp), %ecx     #%ecx = i    
+                mov -12(%ebp), %ecx     # %ecx = i    
                 add %ecx, %eax          # %eax = i + r * matorder
                 
-                mov -8(%ebp), %ebx      #%ebx = c
-                imul 20(%ebp), %ecx     #%ecx = i * matorder
-                add %ecx, %ebx          #%ebx = c + i * matorder
+                mov -8(%ebp), %ebx      # %ebx = c
+                imul 20(%ebp), %ecx     # %ecx = i * matorder
+                add %ecx, %ebx          # %ebx = c + i * matorder
 
                 mov 8(%ebp), %ecx	# %ecx = inmatdata1
 		mov 12(%ebp), %edx	# %edx = inmatdata2
@@ -62,8 +62,6 @@ matrix_multiply_asm:
 
                 mov -16(%ebp), %eax
                 add %edx, %eax          # elem += inmatdata1[%eax] * inmatdata2[%ebx]       
-
-
 
 
         for3end:   

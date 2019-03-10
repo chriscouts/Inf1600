@@ -38,7 +38,7 @@ matrix_transpose_asm:
 		imul 16(%ebp), %edx # %edx = c * matorder
 		add %ecx, %edx		# %edx = c * matorder + r
 
-		mov 8(%ebp), %ecx	# %edx = inmatdata
+		mov 8(%ebp), %ecx	# %ecx = inmatdata
 		mov 12(%ebp), %ebx	# %ebx = outmatdata
 
 		mov 0(%ecx, %edx, 4), %ecx		# %ecx = inmatdata[%edx]
@@ -46,5 +46,5 @@ matrix_transpose_asm:
 		
 
 	for2end:
-	        incl -8(%ebp)		# ++c
+	    incl -8(%ebp)		# ++c
 		jmp for2test
