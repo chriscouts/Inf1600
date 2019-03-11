@@ -1,3 +1,9 @@
+/*
+* Titre : average.s
+* Date : 11 Mars 2019
+* Auteurs : Christophe Couturier et Alexandre Touchette
+*/
+
 .global matrix_row_aver_asm
 
 matrix_row_aver_asm:

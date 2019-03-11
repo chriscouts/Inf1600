@@ -1,3 +1,9 @@
+/*
+* Titre : diagonal.s
+* Date : 11 Mars 2019
+* Auteurs : Christophe Couturier et Alexandre Touchette
+*/
+
 .global matrix_diagonal_asm
 
 matrix_diagonal_asm:
