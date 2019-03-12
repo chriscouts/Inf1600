@@ -22,8 +22,6 @@ _ZNK9CTriangle9HeightAsmEv:
         # Division (2.0f * A) / mSides[2]
         fld 12(%ebx)                      # st[0] = %ecx, st[1] = factor * Areacpp
         fdivrp                          # st[0] = st[1] = (factor * Areacpp) / mSides[2]
-        
-
 
         popa
         leave          /* restore ebp and esp */
