@@ -6,7 +6,7 @@
 _ZNK9CTriangle7AreaAsmEv:
 	push %ebp				/* save old base pointer */
 	mov %esp, %ebp			/* set ebp to current esp */
-	sub 4(%ebp)				# ajoute 4 bytes pour p
+	sub $4, %ebp			# ajoute 4 bytes pour p
 	
 	movl 8(%ebp), %ebx		# %ebx = CTriangle
 	
