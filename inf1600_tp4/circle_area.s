@@ -4,11 +4,11 @@ _ZNK7CCircle7AreaAsmEv:
         push %ebp      /* save old base pointer */
         mov %esp, %ebp /* set ebp to current esp */
         
-        # Mettre le pointeur this dans %eax
-        mov (this), %eax        # %eax = this
+        # Met le pointeur this dans %eax
+        mov 8(%ebp), %eax        # %eax = this
 
         # Met le mRadius dans %ebx
-        mov 4((this)), %ebx     # %ebx = mRadius
+        mov 4(%eax), %ebx     # %ebx = mRadius
 
         # Met le mRadius dans %ebx
         mov 4((this)), %ecx     # %ecx = mRadius
