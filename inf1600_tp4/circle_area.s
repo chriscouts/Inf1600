@@ -3,6 +3,7 @@
 _ZNK7CCircle7AreaAsmEv:
         push %ebp      /* save old base pointer */
         mov %esp, %ebp /* set ebp to current esp */
+        pusha
         
         # Met le pointeur this dans %eax
         mov 8(%ebp), %eax        # %eax = this
@@ -22,6 +23,6 @@ _ZNK7CCircle7AreaAsmEv:
         # Multiplie st[0] et st[1] 
         fmulp                   # st[0] = st[1] = pi * mRadius * mRadius
         
-        
+        popa
         leave          /* restore ebp and esp */
         ret            /* return to the caller */

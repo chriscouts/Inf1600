@@ -3,6 +3,7 @@
 _ZNK9CTriangle12PerimeterAsmEv:
 	push %ebp      					/* save old base pointer */
 	mov %esp, %ebp 					/* set ebp to current esp */
+	pusha
 	
 	# Met le pointeur this dans %eax
 
@@ -28,5 +29,6 @@ _ZNK9CTriangle12PerimeterAsmEv:
 
 	faddp							# st[0] = st[1] = mSides[2] + (mSides)[1] + mSides[0])
 
+	popa
 	leave          					/* restore ebp and esp */
 	ret            					/* return to the caller */

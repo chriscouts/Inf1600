@@ -7,6 +7,7 @@
 _ZNK7CCircle12PerimeterAsmEv:
         push %ebp               /* save old base pointer */
         mov %esp, %ebp          /* set ebp to current esp */
+		pusha
 
 	
         movl 8(%ebp), %ebx       # %ebx = CCircle
@@ -26,6 +27,6 @@ _ZNK7CCircle12PerimeterAsmEv:
 		# 2.0 * PI * mRadius
 		fmulp					# st[0] = st[1] = PI * mRadius * factor
 
-
+		popa
         leave					/* restore ebp and esp */
         ret						/* return to the caller */
