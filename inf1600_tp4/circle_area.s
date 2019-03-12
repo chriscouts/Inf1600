@@ -13,13 +13,8 @@ _ZNK7CCircle7AreaAsmEv:
         # Push %ebx au dessus de la pile
         fld %ebx               # st[0] = mRadius
         
-<<<<<<< HEAD
-        # Push %ecx au dessus de la pile
-        fld %ecx               # st[0] = st[1] = mRadius
-=======
         # Push %ebx au dessus de la pile
         fld %ebx               # st[0] = st[1] = mRadius
->>>>>>> 009a1f018e9ca824bfe4dc3f6f5155967d536bbb
         
         # Multiplie st[0] et stp[1]
         fmulp                   # st[0] = st[1] = mRadius * mRadius

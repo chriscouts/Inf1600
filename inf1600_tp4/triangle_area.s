@@ -24,7 +24,8 @@ _ZNK9CTriangle7AreaAsmEv:
 	# Perimeter / 2.0
 
 	fld factor				# st[0] = factor
-	fld call *(%ebx)		# st[0] = PerimeterCpp() | st[1] = factor
+	push 8(%ebp)
+	call *(%ebx)			# st[0] = PerimeterCpp() | st[1] = factor
 	fdivp					# st[0] = st[1] = Perimeter.Cpp() / factor
 
 	# Sauvegarde p
