@@ -3,7 +3,7 @@
 _ZNK9CTriangle9HeightAsmEv:
         push %ebp      /* save old base pointer */
         mov %esp, %ebp /* set ebp to current esp */
-        sub 4(%ebp)                     # Ajoute 4 byte pour A
+        sub $4, (%ebp)                     # Ajoute 4 byte pour A
 
         movl 8(%ebp), %eax              # %eax = this
         movl (%eax), %ebx               # %eax = triangle.vtable 
@@ -16,7 +16,7 @@ _ZNK9CTriangle9HeightAsmEv:
 
         # Division (2.0f * A) / mSides[2]
         movl 12(%eax), %ecx             # %ecx = mSides[2]
-        push %ecx                       # st[0] = %ecx, st[1] = factor * Areacpp
+        fld %ecx                       # st[0] = %ecx, st[1] = factor * Areacpp
         fdivrp                          #st[0] = st[1] = (factor * Areacpp) / mSides[2]
         
 

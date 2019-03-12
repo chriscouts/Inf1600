@@ -14,10 +14,10 @@ _ZNK9CTriangle12PerimeterAsmEv:
         movl 4(%eax), %ecx       # %ecx = mSides[1]
 
         # Met %ebx au dessus de la pile
-        push %ebx               # st[0] = %ebx
+        fld %ebx               # st[0] = %ebx
 
         # Met %ecx au dessus de la pile
-        push %ecx               # st[0] = %ecx, st[0] = %eax
+        fld %ecx               # st[0] = %ecx, st[0] = %eax
 
         # Additione les côtés mSides[1] et mSides[0]
         faddp                   #st[0] = st[1] = %ebx + %ecx = mSides[1] + mSides[0]
