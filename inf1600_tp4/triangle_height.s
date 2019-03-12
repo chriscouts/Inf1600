@@ -1,3 +1,6 @@
+.data
+	factor: .float 2.0 		/* use this to divide by two */
+.text
 .globl	_ZNK9CTriangle9HeightAsmEv
 
 _ZNK9CTriangle9HeightAsmEv:
@@ -16,8 +19,7 @@ _ZNK9CTriangle9HeightAsmEv:
         fmulp                           # st[0] = st[1] = factor * Areacpp
 
         # Division (2.0f * A) / mSides[2]
-        movl 12(%eax), %ecx             # %ecx = mSides[2]
-        fld %ecx                       # st[0] = %ecx, st[1] = factor * Areacpp
+        fld 12(%eax)                      # st[0] = %ecx, st[1] = factor * Areacpp
         fdivrp                          # st[0] = st[1] = (factor * Areacpp) / mSides[2]
         
 

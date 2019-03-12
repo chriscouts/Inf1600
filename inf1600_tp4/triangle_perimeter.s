@@ -1,32 +1,32 @@
 .globl _ZNK9CTriangle12PerimeterAsmEv
 
 _ZNK9CTriangle12PerimeterAsmEv:
-        push %ebp      /* save old base pointer */
-        mov %esp, %ebp /* set ebp to current esp */
-        
-        # Met le pointeur this dans %eax
-        movl 8(%ebp), %eax        # %eax = this
-        
-        # Met le premier côté dans %ebx
-        movl 4(%eax), %ebx       # %ebx = mSides[0]
+	push %ebp      					/* save old base pointer */
+	mov %esp, %ebp 					/* set ebp to current esp */
+	
+	# Met le pointeur this dans %eax
 
-        # Met le deuxième côté dans %ecx
-        movl 4(%eax), %ecx       # %ecx = mSides[1]
+	movl 8(%ebp), %eax				# %eax = this
+	
+	# Met 1er cote au dessus de la pile
 
-        # Met %ebx au dessus de la pile
-        fld %ebx               # st[0] = %ebx
+	fld  4(%eax)					# st[0] = mSides[0]
 
-        # Met %ecx au dessus de la pile
-        fld %ecx               # st[0] = %ecx, st[0] = %eax
+	# Met 2e cote au dessus de la pile
 
-        # Additione les côtés mSides[1] et mSides[0]
-        faddp                   #st[0] = st[1] = %ebx + %ecx = mSides[1] + mSides[0]
+	fld  8(%eax) 					# st[0] = mSides[1], st[1] = mSides[0]
 
-        # Met le troisième côté dans %edx
-        movl 4(%eax), %edx       # %edx = mSides[2]
+	# Additione les côtés mSides[1] et mSides[0]
 
-        # Additione le troisième côté au deux premier
-        faddp                   # st[0] = st[1] = mSides[2] + (mSides)[1] + mSides[0])
+	faddp							# st[0] = st[1] = %ebx + %ecx = mSides[1] + mSides[0]
 
-        leave          /* restore ebp and esp */
-        ret            /* return to the caller */
+	# Met 3e cote au dessus de la pile
+
+	fld  12(%eax)					# st[0] = mSides[2], st[1] = mSides[1] + mSides[0]
+
+	# Additione le troisième côté au deux premier
+
+	faddp							# st[0] = st[1] = mSides[2] + (mSides)[1] + mSides[0])
+
+	leave          					/* restore ebp and esp */
+	ret            					/* return to the caller */

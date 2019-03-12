@@ -12,14 +12,13 @@ _ZNK9CTriangle7AreaAsmEv:
 	
 	# Sauvegarde les sides
 
-	movl 4(%ebx), %eax		# %eax = mSides[0]
-	movl 8(%ebx), %ecx		# %ecx = mSides[0]
-	movl 12(%ebx), %edx		# %edx = mSides[0]
+	# movl 4(%ebx), %eax		# %eax = mSides[0]
+	# movl 8(%ebx), %ecx		# %ecx = mSides[0]
+	# movl 12(%ebx), %edx		# %edx = mSides[0]
 
 	# Trouve PerimeterCpp
 
-	movl (%ebx), %ebx		# %ebx = trangle.vtable
-	movl 8(%ebx), %ebx		# %ebx = PerimeterCpp
+	movl (%ebx), %eax		# %ebx = triangle.vtable
 
 	# Perimeter / 2.0
 
@@ -30,40 +29,40 @@ _ZNK9CTriangle7AreaAsmEv:
 
 	# Sauvegarde p
 
-	fstp %ebx				# %ebx = PerimeterCpp() / factor
-	movl %ebx, -4(%ebp)		# p = %ebx = PerimeterCpp() / factor
+	fstp (%eax)				# %ebx = PerimeterCpp() / factor
+	movl %eax, -4(%ebp)		# p = %ebx = PerimeterCpp() / factor
 
 	# Sauvegarde p - mSides[0]
 
-	fld %ebx				# st[0] = p
-	fld %eax				# st[0] = mSides[0] | st[1] = p
+	fld 8(%eax)				# st[0] = p
+	fld 4(%ebx)				# st[0] = mSides[0] | st[1] = p
 	fsubrp					# st[0] = st[1] = p - mSides[0]
-	fstp %eax				# %eax = p - mSides[0]
+	fstp 4(%ebx)				# %eax = p - mSides[0]
 
 	# Sauvegarde p - mSides[1]
 
-	fld %ebx				# st[0] = p
-	fld %ecx				# st[0] = mSides[1] | st[1] = p
+	fld 8(%eax)				# st[0] = p
+	fld 8(%ebx)				# st[0] = mSides[1] | st[1] = p
 	fsubrp					# st[0] = st[1] = p - mSides[1]
-	fstp %ecx				# %eax = p - mSides[1]
+	fstp 8(%ebx)				# %eax = p - mSides[1]
 
 	# Sauvegarde p - mSides[2]
 
-	fld %ebx				# st[0] = p
-	fld %edx				# st[0] = mSides[2] | st[1] = p
+	fld 8(%eax)				# st[0] = p
+	fld 12(%ebx)				# st[0] = mSides[2] | st[1] = p
 	fsubrp					# st[0] = st[1] = p - mSides[2]
-	fstp %edx				# %eax = p - mSides[2]
+	fstp 12(%ebx)				# %eax = p - mSides[2]
 	
 	# p*(p-mSides[0])*(p-mSides[1])*(p-mSides[2])
 
-	fld %ebx				# st[0] = p
-	fld %eax				# st[0] = %eax | st[1] = p
+	fld 8(%eax)				# st[0] = p
+	fld 4(%ebx)				# st[0] = %eax | st[1] = p
 	fmulp					# st[0] = st[1] = p * %eax
 	
-	fld %ecx				# st[0] = %ecx | st[1] = p * %eax
+	fld 8(%ebx)				# st[0] = %ecx | st[1] = p * %eax
 	fmulp					# st[0] = st[1] = p * %eax * %ecx
 
-	fld %edx				# st[0] = %edx | st[1] = p * %eax * %ecx
+	fld 12(%ebx)				# st[0] = %edx | st[1] = p * %eax * %ecx
 	fmulp					# st[0] = st[1] = p * %eax * %ecx * %edx
 
 	# Faire le sqrt
