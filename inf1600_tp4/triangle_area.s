@@ -10,15 +10,14 @@ _ZNK9CTriangle7AreaAsmEv:
 	
 	movl 8(%ebp), %eax		# %ebx = this
 	movl (%eax), %ebx		# %ebx = triangle.vtable
-	movl $0, %ecx
 
 	# Perimeter / 2.0
 
 	push 8(%ebp)
 	call *8(%ebx)			# st[0] = PerimeterCpp()
-	fld factor				# st[0] = factor | st[1] = PerimeterCpp()
 	pop 8(%ebp)
-	fdivp					# st[0] = st[1] = Perimeter.Cpp() / factor
+	fld factor				# st[0] = factor | st[1] = PerimeterCpp()
+	fdivrp					# st[0] = st[1] = Perimeter.Cpp() / factor
 
 	# Sauvegarde p
 
@@ -48,10 +47,7 @@ _ZNK9CTriangle7AreaAsmEv:
 
 	fld -4(%ebp)			# st[0] = p
 	fmulp					# st[0] = st[1] = p * (p - mSides[0])
-	
-
 	fmulp					# st[0] = st[1] = p * (p - mSides[0]) * (p - mSides[1])
-	
 	fmulp					# st[0] = st[1] = p * (p - mSides[0]) * (p - mSides[1]) * (p - mSides[2])
 
 	# Faire le sqrt
