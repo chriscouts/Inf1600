@@ -8,8 +8,9 @@ _ZNK9CTriangle7AreaAsmEv:
 	mov %esp, %ebp			/* set ebp to current esp */
 	pusha 
 	
-	movl 8(%ebp), %ebx		# %ebx = this
-	movl (%ebx), %ebx		# %ebx = triangle.vtable
+	movl 8(%ebp), %eax		# %ebx = this
+	movl (%eax), %ebx		# %ebx = triangle.vtable
+	movl $0, %ecx
 
 	# Perimeter / 2.0
 
@@ -21,38 +22,40 @@ _ZNK9CTriangle7AreaAsmEv:
 
 	# Sauvegarde p
 
-	fstp -4(%ebp)			# %ebx = PerimeterCpp() / factor
+	fstp -4(%ebp)			# p = PerimeterCpp() / factor
 
 	# p - mSides[0]
 
 	fld -4(%ebp)			# st[0] = p
-	fld 4(%ebx)				# st[0] = mSides[0] | st[1] = p
+	fld 4(%eax)				# st[0] = mSides[0] | st[1] = p
 	fsubrp					# st[0] = st[1] = p - mSides[0]
+
 
 	# p - mSides[1]
 
 	fld -4(%ebp)			# st[0] = p
-	fld 8(%ebx)				# st[0] = mSides[1] | st[1] = p
+	fld 8(%eax)				# st[0] = mSides[1] | st[1] = p
 	fsubrp					# st[0] = st[1] = p - mSides[1]
 
 	# p - mSides[2]
 
 	fld -4(%ebp)			# st[0] = p
-	fld 12(%ebx)			# st[0] = mSides[2] | st[1] = p
+	fld 12(%eax)			# st[0] = mSides[2] | st[1] = p
 	fsubrp					# st[0] = st[1] = p - mSides[2]
-	
+
 	# p*(p-mSides[0])*(p-mSides[1])*(p-mSides[2])
 
+
 	fld -4(%ebp)			# st[0] = p
+	fmulp					# st[0] = st[1] = p * (p - mSides[0])
 	
-	fmulp					# st[0] = st[1] = p * %eax
-	fstp %eax
-	fmulp					# st[0] = st[1] = p * %eax * %ecx
+
+	fmulp					# st[0] = st[1] = p * (p - mSides[0]) * (p - mSides[1])
 	
-	fmulp					# st[0] = st[1] = p * %eax * %ecx * %edx
+	fmulp					# st[0] = st[1] = p * (p - mSides[0]) * (p - mSides[1]) * (p - mSides[2])
 
 	# Faire le sqrt
-	fsqrt					# st[0] = sqrt(p * %eax * %ecx * %edx)
+	fsqrt					# st[0] = sqrt(p * (p - mSides[0]) * (p - mSides[1]) * (p - mSides[2]))
 	
 	popa
 	leave					/* restore ebp and esp */
