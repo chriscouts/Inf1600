@@ -13,10 +13,12 @@ unsigned int Decryption_fct(unsigned int le)
 	 */
 	
 
-	asm volatile (
+	asm volatile ("rol $8, %1\n\t"
+				"bswap %1"
+				
 		// instructions...
-		: // sorties (s'il y a lieu)
-		: // entrées
+		:"=q" (be) // sorties (s'il y a lieu)
+		:"r" (le) // entrées
 		: // registres modifiés (s'il y a lieu)
 	);
 
